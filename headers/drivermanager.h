@@ -3,6 +3,7 @@
 
 #include "enums.pb.h"
 #include "gpdriver.h"
+#include <memory>
 
 class GPDriver;
 
@@ -14,13 +15,13 @@ public:
         static DriverManager instance; // Guaranteed to be destroyed. // Instantiated on first use.
         return instance;
     }
-    GPDriver * getDriver() { return driver; }
+    	GPDriver * getDriver() { return driver.get(); }
     void setup(InputMode);
     InputMode getInputMode(){ return inputMode; }
     bool isConfigMode(){ return (inputMode == INPUT_MODE_CONFIG); }
 private:
     DriverManager() {}
-    GPDriver * driver;
+    	std::unique_ptr<GPDriver> driver;
     InputMode inputMode;
 };
 

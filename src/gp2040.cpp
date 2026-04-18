@@ -10,6 +10,7 @@
 #include "addonmanager.h"
 #include "types.h"
 #include "usbhostmanager.h"
+#include "benchmark.h"
 
 // Inputs for Core0
 #include "addons/analog.h"
@@ -20,17 +21,23 @@
 #include "addons/keyboard_host.h"
 #include "addons/i2canalog1219.h"
 #include "addons/reverse.h"
+#ifdef GP2040_ADDON_TURBO
 #include "addons/turbo.h"
+#endif
 #include "addons/slider_socd.h"
 #include "addons/spi_analog_ads1256.h"
+#ifdef GP2040_ADDON_WIIEXT
 #include "addons/wiiext.h"
+#endif
 #include "addons/input_macro.h"
 #include "addons/snes_input.h"
 #include "addons/rotaryencoder.h"
 #include "addons/i2c_gpio_pcf8575.h"
 #include "addons/gamepad_usb_host.h"
 #include "addons/he_trigger.h"
+#ifdef GP2040_ADDON_TG16
 #include "addons/tg16_input.h"
+#endif
 
 // Pico includes
 #include "pico/bootrom.h"
@@ -104,27 +111,33 @@ void GP2040::setup() {
 	adc_init();
 
 	// Setup Add-ons
-	addons.LoadUSBAddon(new KeyboardHostAddon());
-	addons.LoadUSBAddon(new GamepadUSBHostAddon());
-	addons.LoadAddon(new AnalogInput());
-	addons.LoadAddon(new HETriggerAddon());
-	addons.LoadAddon(new BootselButtonAddon());
-	addons.LoadAddon(new DualDirectionalInput());
-	addons.LoadAddon(new FocusModeAddon());
-	addons.LoadAddon(new I2CAnalog1219Input());
-	addons.LoadAddon(new SPIAnalog1256Input());
-	addons.LoadAddon(new WiiExtensionInput());
-	addons.LoadAddon(new SNESpadInput());
-	addons.LoadAddon(new SliderSOCDInput());
-	addons.LoadAddon(new TiltInput());
-	addons.LoadAddon(new RotaryEncoderInput());
-	addons.LoadAddon(new PCF8575Addon());
-	addons.LoadAddon(new TG16padInput());
+	addons.LoadUSBAddon(std::make_unique<KeyboardHostAddon>());
+	addons.LoadUSBAddon(std::make_unique<GamepadUSBHostAddon>());
+	addons.LoadAddon(std::make_unique<AnalogInput>());
+	addons.LoadAddon(std::make_unique<HETriggerAddon>());
+	addons.LoadAddon(std::make_unique<BootselButtonAddon>());
+	addons.LoadAddon(std::make_unique<DualDirectionalInput>());
+	addons.LoadAddon(std::make_unique<FocusModeAddon>());
+	addons.LoadAddon(std::make_unique<I2CAnalog1219Input>());
+	addons.LoadAddon(std::make_unique<SPIAnalog1256Input>());
+#ifdef GP2040_ADDON_WIIEXT
+	addons.LoadAddon(std::make_unique<WiiExtensionInput>());
+#endif
+	addons.LoadAddon(std::make_unique<SNESpadInput>());
+	addons.LoadAddon(std::make_unique<SliderSOCDInput>());
+	addons.LoadAddon(std::make_unique<TiltInput>());
+	addons.LoadAddon(std::make_unique<RotaryEncoderInput>());
+	addons.LoadAddon(std::make_unique<PCF8575Addon>());
+#ifdef GP2040_ADDON_TG16
+	addons.LoadAddon(std::make_unique<TG16padInput>());
+#endif
 
 	// Input override addons
-	addons.LoadAddon(new ReverseInput());
-	addons.LoadAddon(new TurboInput()); // Turbo overrides button states and should be close to the end
-	addons.LoadAddon(new InputMacro());
+	addons.LoadAddon(std::make_unique<ReverseInput>());
+#ifdef GP2040_ADDON_TURBO
+	addons.LoadAddon(std::make_unique<TurboInput>()); // Turbo overrides button states and should be close to the end
+#endif
+	addons.LoadAddon(std::make_unique<InputMacro>());
 
 	InputMode inputMode = gamepad->getOptions().inputMode;
 	const BootAction bootAction = getBootAction();
@@ -249,32 +262,44 @@ void GP2040::deinitializeStandardGpio() {
  * For ease of use this provides the mask bitwise NOTed so that callers don't have to. To avoid misuse
  * and to simplify this method, non-button GPIO IS NOT PRESENT in this result. Use gpio_get_all directly
  * instead, if you don't want debounced data.
+ *
+ * Placed in RAM for fastest execution (avoiding flash access latency).
+ * Optimized to process only changed pins using __builtin_ctz for fast bit scanning.
  */
-void GP2040::debounceGpioGetAll() {
+void __not_in_flash_func(GP2040::debounceGpioGetAll)() {
 	Mask_t raw_gpio = ~gpio_get_all();
-	Gamepad* gamepad = Storage::getInstance().GetGamepad();
-	// return if state isn't different than the actual
-	if (gamepad->debouncedGpio == (raw_gpio & buttonGpios)) return;
+	Storage& storage = Storage::getInstance();  // Cache reference once
+	Gamepad* gamepad = storage.GetGamepad();
 
-	uint32_t debounceDelay = Storage::getInstance().getGamepadOptions().debounceDelay;
-	// abort if no delay is configured
-	if (debounceDelay == 0) {
-		gamepad->debouncedGpio = raw_gpio;
+	uint32_t debounceDelay = storage.getGamepadOptions().debounceDelay;
+
+	// Fast path: no debounce delay - update immediately
+	if (debounceDelay == 0) [[likely]] {
+		gamepad->debouncedGpio = raw_gpio & buttonGpios;
 		return;
 	}
 
+	// Calculate changed pins
+	Mask_t changed = (gamepad->debouncedGpio ^ raw_gpio) & buttonGpios;
+
+	// Early return if no changes
+	if (changed == 0) [[likely]] return;
+
 	uint32_t now = getMillis();
-	// check each button use case GPIO for state
-	for (Pin_t pin = 0; pin < (Pin_t)NUM_BANK0_GPIOS; pin++) {
-		Mask_t pin_mask = 1 << pin;
-		if (buttonGpios & pin_mask) {
-			// Allow debouncer to change state if button state changed and debounce delay threshold met
-			if ((gamepad->debouncedGpio & pin_mask) != \
-					(raw_gpio & pin_mask) && ((now - gpioDebounceTime[pin]) > debounceDelay)) {
-				gamepad->debouncedGpio ^= pin_mask;
-				gpioDebounceTime[pin] = now;
-			}
+
+	// Process only changed pins using __builtin_ctz (Count Trailing Zeros)
+	// This is much faster than iterating all pins when only a few changed
+	while (changed) {
+		Pin_t pin = __builtin_ctz(changed);  // Find first set bit
+		Mask_t pin_mask = 1u << pin;
+
+		// Check if debounce delay has elapsed
+		if ((now - gpioDebounceTime[pin]) > debounceDelay) {
+			gamepad->debouncedGpio ^= pin_mask;
+			gpioDebounceTime[pin] = now;
 		}
+
+		changed &= ~pin_mask;  // Clear processed bit
 	}
 }
 
@@ -296,6 +321,7 @@ void GP2040::run() {
 	}
 
 	while (1) { // LOOP
+        Benchmark::start();
 		this->getReinitGamepad(gamepad);
 
 		memcpy(&prevState, &gamepad->state, sizeof(GamepadState));
@@ -315,6 +341,7 @@ void GP2040::run() {
 			inputDriver->process(gamepad);
 			rebootHotkeys.process(gamepad, configMode);
 			checkSaveRebootState();
+            Benchmark::end();
 			continue;
 		}
 
@@ -349,6 +376,7 @@ void GP2040::run() {
 
 		// Check if we have a pending save
 		checkSaveRebootState();
+        Benchmark::end();
 	}
 }
 

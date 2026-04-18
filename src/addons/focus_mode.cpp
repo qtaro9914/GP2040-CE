@@ -14,10 +14,16 @@ void FocusModeAddon::setup() {
 
 void FocusModeAddon::process() {
 	Gamepad * gamepad = Storage::getInstance().GetGamepad();
-	const FocusModeOptions& options = Storage::getInstance().getAddonOptions().focusModeOptions;
-	// Override Enabled Focus-Mode Toggle OR the pin has been pressed
-	if ( options.overrideEnabled || 
-		(gamepad->mapFocusMode->pinMask && (gamepad->debouncedGpio & gamepad->mapFocusMode->pinMask))) {
+	FocusModeOptions& focusModeOptions = Storage::getInstance().getAddonOptions().focusModeOptions;
+	// Override	// Enable Focus Mode if the button is pressed
+	if (!focusModeOptions.enabled &&
+		(gamepad->mapFocusMode.pinMask && (gamepad->debouncedGpio & gamepad->mapFocusMode.pinMask))) {
+		focusModeOptions.enabled = true;
+
+		Storage::getInstance().save();
+	}
+	// If focus mode is enabled, apply button locks
+	if (focusModeOptions.enabled) {
 		if (buttonLockMask & GAMEPAD_MASK_DU) {
 			gamepad->state.dpad &= ~GAMEPAD_MASK_UP;
 		}

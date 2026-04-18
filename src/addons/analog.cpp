@@ -61,6 +61,11 @@ void AnalogInput::setup() {
         adc_pairs[i].y_magnitude = 0.0f;
         adc_pairs[i].x_ema = 0.0f;
         adc_pairs[i].y_ema = 0.0f;
+        // Pre-compute squared deadzone threshold for fast comparison (avoids sqrt in common case)
+        // Comparison: error_rate * sqrt(x^2+y^2) < in_deadzone
+        // Equivalent: x^2+y^2 < (in_deadzone/error_rate)^2
+        float threshold = adc_pairs[i].in_deadzone / adc_pairs[i].error_rate;
+        adc_pairs[i].in_deadzone_sq = threshold * threshold;
     }
 
     // Intialize and auto center X/Y for each pair
@@ -124,11 +129,18 @@ void AnalogInput::process() {
             }
         }
         // Look for dead-zones and circularity
-        adc_pairs[i].xy_magnitude = magnitudeCalculation(i, adc_pairs[i]);
-        if (adc_pairs[i].xy_magnitude < adc_pairs[i].in_deadzone) {
+        // Fast path: check squared magnitude first (avoids sqrt for most frames)
+        adc_pairs[i].x_magnitude = adc_pairs[i].x_value - ANALOG_CENTER;
+        adc_pairs[i].y_magnitude = adc_pairs[i].y_value - ANALOG_CENTER;
+        float mag_sq = (adc_pairs[i].x_magnitude * adc_pairs[i].x_magnitude) +
+                       (adc_pairs[i].y_magnitude * adc_pairs[i].y_magnitude);
+        if (mag_sq < adc_pairs[i].in_deadzone_sq) {
+            // Inside deadzone - no sqrt needed
             adc_pairs[i].x_value = ANALOG_CENTER;
             adc_pairs[i].y_value = ANALOG_CENTER;
         } else {
+            // Outside deadzone - need actual magnitude for normalization
+            adc_pairs[i].xy_magnitude = adc_pairs[i].error_rate * std::sqrt(mag_sq);
             radialDeadzone(i, adc_pairs[i]);
         }
 

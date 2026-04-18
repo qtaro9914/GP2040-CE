@@ -125,6 +125,7 @@ typedef struct
     float ema_smoothing;
     float error_rate;
     float in_deadzone;
+    float in_deadzone_sq;  // Pre-computed squared threshold for fast comparison
     float out_deadzone;
     bool auto_calibration;
     bool forced_circularity;

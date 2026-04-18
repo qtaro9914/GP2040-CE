@@ -36,136 +36,136 @@ void Gamepad::setup()
 	// Configure pin mapping
 	GpioMappingInfo* pinMappings = Storage::getInstance().getProfilePinMappings();
 
-	mapDpadUp       = new GamepadButtonMapping(GAMEPAD_MASK_UP);
-	mapDpadDown     = new GamepadButtonMapping(GAMEPAD_MASK_DOWN);
-	mapDpadLeft     = new GamepadButtonMapping(GAMEPAD_MASK_LEFT);
-	mapDpadRight    = new GamepadButtonMapping(GAMEPAD_MASK_RIGHT);
-	mapButtonB1     = new GamepadButtonMapping(GAMEPAD_MASK_B1);
-	mapButtonB2     = new GamepadButtonMapping(GAMEPAD_MASK_B2);
-	mapButtonB3     = new GamepadButtonMapping(GAMEPAD_MASK_B3);
-	mapButtonB4     = new GamepadButtonMapping(GAMEPAD_MASK_B4);
-	mapButtonL1     = new GamepadButtonMapping(GAMEPAD_MASK_L1);
-	mapButtonR1     = new GamepadButtonMapping(GAMEPAD_MASK_R1);
-	mapButtonL2     = new GamepadButtonMapping(GAMEPAD_MASK_L2);
-	mapButtonR2     = new GamepadButtonMapping(GAMEPAD_MASK_R2);
-	mapButtonS1     = new GamepadButtonMapping(GAMEPAD_MASK_S1);
-	mapButtonS2     = new GamepadButtonMapping(GAMEPAD_MASK_S2);
-	mapButtonL3     = new GamepadButtonMapping(GAMEPAD_MASK_L3);
-	mapButtonR3     = new GamepadButtonMapping(GAMEPAD_MASK_R3);
-	mapButtonA1     = new GamepadButtonMapping(GAMEPAD_MASK_A1);
-	mapButtonA2     = new GamepadButtonMapping(GAMEPAD_MASK_A2);
-	mapButtonA3     = new GamepadButtonMapping(GAMEPAD_MASK_A3);
-	mapButtonA4     = new GamepadButtonMapping(GAMEPAD_MASK_A4);
-	mapButtonE1     = new GamepadButtonMapping(GAMEPAD_MASK_E1);
-	mapButtonE2     = new GamepadButtonMapping(GAMEPAD_MASK_E2);
-	mapButtonE3     = new GamepadButtonMapping(GAMEPAD_MASK_E3);
-	mapButtonE4     = new GamepadButtonMapping(GAMEPAD_MASK_E4);
-	mapButtonE5     = new GamepadButtonMapping(GAMEPAD_MASK_E5);
-	mapButtonE6     = new GamepadButtonMapping(GAMEPAD_MASK_E6);
-	mapButtonE7     = new GamepadButtonMapping(GAMEPAD_MASK_E7);
-	mapButtonE8     = new GamepadButtonMapping(GAMEPAD_MASK_E8);
-	mapButtonE9     = new GamepadButtonMapping(GAMEPAD_MASK_E9);
-	mapButtonE10    = new GamepadButtonMapping(GAMEPAD_MASK_E10);
-	mapButtonE11    = new GamepadButtonMapping(GAMEPAD_MASK_E11);
-	mapButtonE12    = new GamepadButtonMapping(GAMEPAD_MASK_E12);
-	mapButtonFn     = new GamepadButtonMapping(AUX_MASK_FUNCTION);
-	mapButtonDP     = new GamepadButtonMapping(SUSTAIN_DP_MODE_DP);
-	mapButtonLS     = new GamepadButtonMapping(SUSTAIN_DP_MODE_LS);
-	mapButtonRS     = new GamepadButtonMapping(SUSTAIN_DP_MODE_RS);
-	mapDigitalUp    = new GamepadButtonMapping(GAMEPAD_MASK_UP);
-	mapDigitalDown  = new GamepadButtonMapping(GAMEPAD_MASK_DOWN);
-	mapDigitalLeft  = new GamepadButtonMapping(GAMEPAD_MASK_LEFT);
-	mapDigitalRight = new GamepadButtonMapping(GAMEPAD_MASK_RIGHT);
-	mapAnalogLSXNeg = new GamepadButtonMapping(ANALOG_DIRECTION_LS_X_NEG);
-	mapAnalogLSXPos = new GamepadButtonMapping(ANALOG_DIRECTION_LS_X_POS);
-	mapAnalogLSYNeg = new GamepadButtonMapping(ANALOG_DIRECTION_LS_Y_NEG);
-	mapAnalogLSYPos = new GamepadButtonMapping(ANALOG_DIRECTION_LS_Y_POS);
-	mapAnalogRSXNeg = new GamepadButtonMapping(ANALOG_DIRECTION_RS_X_NEG);
-	mapAnalogRSXPos = new GamepadButtonMapping(ANALOG_DIRECTION_RS_X_POS);
-	mapAnalogRSYNeg = new GamepadButtonMapping(ANALOG_DIRECTION_RS_Y_NEG);
-	mapAnalogRSYPos = new GamepadButtonMapping(ANALOG_DIRECTION_RS_Y_POS);
-	map48WayMode    = new GamepadButtonMapping(SUSTAIN_4_8_WAY_MODE);
-	mapFocusMode    = new GamepadButtonMapping(SUSTAIN_FOCUS_MODE);
+	mapDpadUp.pinMask       = 0;
+	mapDpadDown.pinMask     = 0;
+	mapDpadLeft.pinMask     = 0;
+	mapDpadRight.pinMask    = 0;
+	mapButtonB1.pinMask     = 0;
+	mapButtonB2.pinMask     = 0;
+	mapButtonB3.pinMask     = 0;
+	mapButtonB4.pinMask     = 0;
+	mapButtonL1.pinMask     = 0;
+	mapButtonR1.pinMask     = 0;
+	mapButtonL2.pinMask     = 0;
+	mapButtonR2.pinMask     = 0;
+	mapButtonS1.pinMask     = 0;
+	mapButtonS2.pinMask     = 0;
+	mapButtonL3.pinMask     = 0;
+	mapButtonR3.pinMask     = 0;
+	mapButtonA1.pinMask     = 0;
+	mapButtonA2.pinMask     = 0;
+	mapButtonA3.pinMask     = 0;
+	mapButtonA4.pinMask     = 0;
+	mapButtonE1.pinMask     = 0;
+	mapButtonE2.pinMask     = 0;
+	mapButtonE3.pinMask     = 0;
+	mapButtonE4.pinMask     = 0;
+	mapButtonE5.pinMask     = 0;
+	mapButtonE6.pinMask     = 0;
+	mapButtonE7.pinMask     = 0;
+	mapButtonE8.pinMask     = 0;
+	mapButtonE9.pinMask     = 0;
+	mapButtonE10.pinMask    = 0;
+	mapButtonE11.pinMask    = 0;
+	mapButtonE12.pinMask    = 0;
+	mapButtonFn.pinMask     = 0;
+	mapButtonDP.pinMask     = 0;
+	mapButtonLS.pinMask     = 0;
+	mapButtonRS.pinMask     = 0;
+	mapDigitalUp.pinMask    = 0;
+	mapDigitalDown.pinMask  = 0;
+	mapDigitalLeft.pinMask  = 0;
+	mapDigitalRight.pinMask = 0;
+	mapAnalogLSXNeg.pinMask = 0;
+	mapAnalogLSXPos.pinMask = 0;
+	mapAnalogLSYNeg.pinMask = 0;
+	mapAnalogLSYPos.pinMask = 0;
+	mapAnalogRSXNeg.pinMask = 0;
+	mapAnalogRSXPos.pinMask = 0;
+	mapAnalogRSYNeg.pinMask = 0;
+	mapAnalogRSYPos.pinMask = 0;
+	map48WayMode.pinMask    = 0;
+	mapFocusMode.pinMask    = 0;
 
 	const auto assignCustomMappingToMaps = [&](GpioMappingInfo mapInfo, Pin_t pin) -> void {
-		if (mapDpadUp->buttonMask & mapInfo.customDpadMask)	mapDpadUp->pinMask |= 1 << pin;
-		if (mapDpadDown->buttonMask & mapInfo.customDpadMask)	mapDpadDown->pinMask |= 1 << pin;
-		if (mapDpadLeft->buttonMask & mapInfo.customDpadMask)	mapDpadLeft->pinMask |= 1 << pin;
-		if (mapDpadRight->buttonMask & mapInfo.customDpadMask)	mapDpadRight->pinMask |= 1 << pin;
-		if (mapButtonB1->buttonMask & mapInfo.customButtonMask)	mapButtonB1->pinMask |= 1 << pin;
-		if (mapButtonB2->buttonMask & mapInfo.customButtonMask)	mapButtonB2->pinMask |= 1 << pin;
-		if (mapButtonB3->buttonMask & mapInfo.customButtonMask)	mapButtonB3->pinMask |= 1 << pin;
-		if (mapButtonB4->buttonMask & mapInfo.customButtonMask)	mapButtonB4->pinMask |= 1 << pin;
-		if (mapButtonL1->buttonMask & mapInfo.customButtonMask)	mapButtonL1->pinMask |= 1 << pin;
-		if (mapButtonR1->buttonMask & mapInfo.customButtonMask)	mapButtonR1->pinMask |= 1 << pin;
-		if (mapButtonL2->buttonMask & mapInfo.customButtonMask)	mapButtonL2->pinMask |= 1 << pin;
-		if (mapButtonR2->buttonMask & mapInfo.customButtonMask)	mapButtonR2->pinMask |= 1 << pin;
-		if (mapButtonS1->buttonMask & mapInfo.customButtonMask)	mapButtonS1->pinMask |= 1 << pin;
-		if (mapButtonS2->buttonMask & mapInfo.customButtonMask)	mapButtonS2->pinMask |= 1 << pin;
-		if (mapButtonL3->buttonMask & mapInfo.customButtonMask)	mapButtonL3->pinMask |= 1 << pin;
-		if (mapButtonR3->buttonMask & mapInfo.customButtonMask)	mapButtonR3->pinMask |= 1 << pin;
-		if (mapButtonA1->buttonMask & mapInfo.customButtonMask)	mapButtonA1->pinMask |= 1 << pin;
-		if (mapButtonA2->buttonMask & mapInfo.customButtonMask)	mapButtonA2->pinMask |= 1 << pin;
-		if (mapDigitalUp->buttonMask & mapInfo.customDpadMask)	mapDigitalUp->pinMask |= 1 << pin;
-		if (mapDigitalDown->buttonMask & mapInfo.customDpadMask)	mapDigitalDown->pinMask |= 1 << pin;
-		if (mapDigitalLeft->buttonMask & mapInfo.customDpadMask)	mapDigitalLeft->pinMask |= 1 << pin;
-		if (mapDigitalRight->buttonMask & mapInfo.customDpadMask)	mapDigitalRight->pinMask |= 1 << pin;
+		if (mapDpadUp.buttonMask & mapInfo.customDpadMask)	mapDpadUp.pinMask |= 1 << pin;
+		if (mapDpadDown.buttonMask & mapInfo.customDpadMask)	mapDpadDown.pinMask |= 1 << pin;
+		if (mapDpadLeft.buttonMask & mapInfo.customDpadMask)	mapDpadLeft.pinMask |= 1 << pin;
+		if (mapDpadRight.buttonMask & mapInfo.customDpadMask)	mapDpadRight.pinMask |= 1 << pin;
+		if (mapButtonB1.buttonMask & mapInfo.customButtonMask)	mapButtonB1.pinMask |= 1 << pin;
+		if (mapButtonB2.buttonMask & mapInfo.customButtonMask)	mapButtonB2.pinMask |= 1 << pin;
+		if (mapButtonB3.buttonMask & mapInfo.customButtonMask)	mapButtonB3.pinMask |= 1 << pin;
+		if (mapButtonB4.buttonMask & mapInfo.customButtonMask)	mapButtonB4.pinMask |= 1 << pin;
+		if (mapButtonL1.buttonMask & mapInfo.customButtonMask)	mapButtonL1.pinMask |= 1 << pin;
+		if (mapButtonR1.buttonMask & mapInfo.customButtonMask)	mapButtonR1.pinMask |= 1 << pin;
+		if (mapButtonL2.buttonMask & mapInfo.customButtonMask)	mapButtonL2.pinMask |= 1 << pin;
+		if (mapButtonR2.buttonMask & mapInfo.customButtonMask)	mapButtonR2.pinMask |= 1 << pin;
+		if (mapButtonS1.buttonMask & mapInfo.customButtonMask)	mapButtonS1.pinMask |= 1 << pin;
+		if (mapButtonS2.buttonMask & mapInfo.customButtonMask)	mapButtonS2.pinMask |= 1 << pin;
+		if (mapButtonL3.buttonMask & mapInfo.customButtonMask)	mapButtonL3.pinMask |= 1 << pin;
+		if (mapButtonR3.buttonMask & mapInfo.customButtonMask)	mapButtonR3.pinMask |= 1 << pin;
+		if (mapButtonA1.buttonMask & mapInfo.customButtonMask)	mapButtonA1.pinMask |= 1 << pin;
+		if (mapButtonA2.buttonMask & mapInfo.customButtonMask)	mapButtonA2.pinMask |= 1 << pin;
+		if (mapDigitalUp.buttonMask & mapInfo.customDpadMask)	mapDigitalUp.pinMask |= 1 << pin;
+		if (mapDigitalDown.buttonMask & mapInfo.customDpadMask)	mapDigitalDown.pinMask |= 1 << pin;
+		if (mapDigitalLeft.buttonMask & mapInfo.customDpadMask)	mapDigitalLeft.pinMask |= 1 << pin;
+		if (mapDigitalRight.buttonMask & mapInfo.customDpadMask)	mapDigitalRight.pinMask |= 1 << pin;
 	};
 
 	for (Pin_t pin = 0; pin < (Pin_t)NUM_BANK0_GPIOS; pin++)
 	{
 		switch (pinMappings[pin].action) {
-			case GpioAction::BUTTON_PRESS_UP:	mapDpadUp->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_DOWN:	mapDpadDown->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_LEFT:	mapDpadLeft->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_RIGHT:	mapDpadRight->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_B1:	mapButtonB1->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_B2:	mapButtonB2->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_B3:	mapButtonB3->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_B4:	mapButtonB4->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_L1:	mapButtonL1->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_R1:	mapButtonR1->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_L2:	mapButtonL2->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_R2:	mapButtonR2->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_S1:	mapButtonS1->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_S2:	mapButtonS2->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_L3:	mapButtonL3->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_R3:	mapButtonR3->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_A1:	mapButtonA1->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_A2:	mapButtonA2->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_A3:	mapButtonA3->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_A4:	mapButtonA4->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E1:	mapButtonE1->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E2:	mapButtonE2->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E3:	mapButtonE3->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E4:	mapButtonE4->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E5:	mapButtonE5->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E6:	mapButtonE6->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E7:	mapButtonE7->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E8:	mapButtonE8->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E9:	mapButtonE9->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E10:	mapButtonE10->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E11:	mapButtonE11->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_E12:	mapButtonE12->pinMask |= 1 << pin; break;
-			case GpioAction::BUTTON_PRESS_FN:	mapButtonFn->pinMask |= 1 << pin; break;
-			case GpioAction::SUSTAIN_DP_MODE_DP:	mapButtonDP->pinMask |= 1 << pin; break;
-			case GpioAction::SUSTAIN_DP_MODE_LS:	mapButtonLS->pinMask |= 1 << pin; break;
-			case GpioAction::SUSTAIN_DP_MODE_RS:	mapButtonRS->pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_UP:	mapDpadUp.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_DOWN:	mapDpadDown.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_LEFT:	mapDpadLeft.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_RIGHT:	mapDpadRight.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_B1:	mapButtonB1.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_B2:	mapButtonB2.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_B3:	mapButtonB3.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_B4:	mapButtonB4.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_L1:	mapButtonL1.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_R1:	mapButtonR1.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_L2:	mapButtonL2.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_R2:	mapButtonR2.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_S1:	mapButtonS1.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_S2:	mapButtonS2.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_L3:	mapButtonL3.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_R3:	mapButtonR3.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_A1:	mapButtonA1.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_A2:	mapButtonA2.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_A3:	mapButtonA3.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_A4:	mapButtonA4.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E1:	mapButtonE1.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E2:	mapButtonE2.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E3:	mapButtonE3.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E4:	mapButtonE4.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E5:	mapButtonE5.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E6:	mapButtonE6.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E7:	mapButtonE7.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E8:	mapButtonE8.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E9:	mapButtonE9.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E10:	mapButtonE10.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E11:	mapButtonE11.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_E12:	mapButtonE12.pinMask |= 1 << pin; break;
+			case GpioAction::BUTTON_PRESS_FN:	mapButtonFn.pinMask |= 1 << pin; break;
+			case GpioAction::SUSTAIN_DP_MODE_DP:	mapButtonDP.pinMask |= 1 << pin; break;
+			case GpioAction::SUSTAIN_DP_MODE_LS:	mapButtonLS.pinMask |= 1 << pin; break;
+			case GpioAction::SUSTAIN_DP_MODE_RS:	mapButtonRS.pinMask |= 1 << pin; break;
 			case GpioAction::CUSTOM_BUTTON_COMBO:	assignCustomMappingToMaps(pinMappings[pin], pin); break;
-			case GpioAction::DIGITAL_DIRECTION_UP:	mapDigitalUp->pinMask |= 1 << pin; break;
-			case GpioAction::DIGITAL_DIRECTION_DOWN:	mapDigitalDown->pinMask |= 1 << pin; break;
-			case GpioAction::DIGITAL_DIRECTION_LEFT:	mapDigitalLeft->pinMask |= 1 << pin; break;
-			case GpioAction::DIGITAL_DIRECTION_RIGHT:	mapDigitalRight->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_LS_X_NEG:	mapAnalogLSXNeg->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_LS_X_POS:	mapAnalogLSXPos->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_LS_Y_NEG:	mapAnalogLSYNeg->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_LS_Y_POS:	mapAnalogLSYPos->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_RS_X_NEG:	mapAnalogRSXNeg->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_RS_X_POS:	mapAnalogRSXPos->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_RS_Y_NEG:	mapAnalogRSYNeg->pinMask |= 1 << pin; break;
-			case GpioAction::ANALOG_DIRECTION_RS_Y_POS:	mapAnalogRSYPos->pinMask |= 1 << pin; break;
-			case GpioAction::SUSTAIN_4_8_WAY_MODE:	map48WayMode->pinMask |= 1 << pin; break;
-			case GpioAction::SUSTAIN_FOCUS_MODE: mapFocusMode->pinMask |= 1 << pin; break;
+			case GpioAction::DIGITAL_DIRECTION_UP:	mapDigitalUp.pinMask |= 1 << pin; break;
+			case GpioAction::DIGITAL_DIRECTION_DOWN:	mapDigitalDown.pinMask |= 1 << pin; break;
+			case GpioAction::DIGITAL_DIRECTION_LEFT:	mapDigitalLeft.pinMask |= 1 << pin; break;
+			case GpioAction::DIGITAL_DIRECTION_RIGHT:	mapDigitalRight.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_LS_X_NEG:	mapAnalogLSXNeg.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_LS_X_POS:	mapAnalogLSXPos.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_LS_Y_NEG:	mapAnalogLSYNeg.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_LS_Y_POS:	mapAnalogLSYPos.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_RS_X_NEG:	mapAnalogRSXNeg.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_RS_X_POS:	mapAnalogRSXPos.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_RS_Y_NEG:	mapAnalogRSYNeg.pinMask |= 1 << pin; break;
+			case GpioAction::ANALOG_DIRECTION_RS_Y_POS:	mapAnalogRSYPos.pinMask |= 1 << pin; break;
+			case GpioAction::SUSTAIN_4_8_WAY_MODE:	map48WayMode.pinMask |= 1 << pin; break;
+			case GpioAction::SUSTAIN_FOCUS_MODE: mapFocusMode.pinMask |= 1 << pin; break;
 			default:				break;
 		}
 	}
@@ -194,57 +194,6 @@ void Gamepad::setup()
  */
 void Gamepad::reinit()
 {
-	delete mapDpadUp;
-	delete mapDpadDown;
-	delete mapDpadLeft;
-	delete mapDpadRight;
-	delete mapButtonB1;
-	delete mapButtonB2;
-	delete mapButtonB3;
-	delete mapButtonB4;
-	delete mapButtonL1;
-	delete mapButtonR1;
-	delete mapButtonL2;
-	delete mapButtonR2;
-	delete mapButtonS1;
-	delete mapButtonS2;
-	delete mapButtonL3;
-	delete mapButtonR3;
-	delete mapButtonA1;
-	delete mapButtonA2;
-	delete mapButtonA3;
-	delete mapButtonA4;
-	delete mapButtonE1;
-	delete mapButtonE2;
-	delete mapButtonE3;
-	delete mapButtonE4;
-	delete mapButtonE5;
-	delete mapButtonE6;
-	delete mapButtonE7;
-	delete mapButtonE8;
-	delete mapButtonE9;
-	delete mapButtonE10;
-	delete mapButtonE11;
-	delete mapButtonE12;
-	delete mapButtonFn;
-	delete mapButtonDP;
-	delete mapButtonLS;
-	delete mapButtonRS;
-	delete mapDigitalUp;
-	delete mapDigitalDown;
-	delete mapDigitalLeft;
-	delete mapDigitalRight;
-	delete mapAnalogLSXNeg;
-	delete mapAnalogLSXPos;
-	delete mapAnalogLSYNeg;
-	delete mapAnalogLSYPos;
-	delete mapAnalogRSXNeg;
-	delete mapAnalogRSXPos;
-	delete mapAnalogRSYNeg;
-	delete mapAnalogRSYPos;
-	delete map48WayMode;
-	delete mapFocusMode;
-
 	// reinitialize pin mappings
 	this->setup();
 }
@@ -253,23 +202,23 @@ void Gamepad::process()
 {
 	// NOTE: Inverted X/Y-axis must run before SOCD and Dpad processing
 	if (options.invertXAxis) {
-		bool left = (state.dpad & mapDpadLeft->buttonMask) != 0;
-		bool right = (state.dpad & mapDpadRight->buttonMask) != 0;
-		state.dpad &= ~(mapDpadLeft->buttonMask | mapDpadRight->buttonMask);
+		bool left = (state.dpad & mapDpadLeft.buttonMask) != 0;
+		bool right = (state.dpad & mapDpadRight.buttonMask) != 0;
+		state.dpad &= ~(mapDpadLeft.buttonMask | mapDpadRight.buttonMask);
 		if (left)
-			state.dpad |= mapDpadRight->buttonMask;
+			state.dpad |= mapDpadRight.buttonMask;
 		if (right)
-			state.dpad |= mapDpadLeft->buttonMask;
+			state.dpad |= mapDpadLeft.buttonMask;
 	}
 
 	if (options.invertYAxis) {
-		bool up = (state.dpad & mapDpadUp->buttonMask) != 0;
-		bool down = (state.dpad & mapDpadDown->buttonMask) != 0;
-		state.dpad &= ~(mapDpadUp->buttonMask | mapDpadDown->buttonMask);
+		bool up = (state.dpad & mapDpadUp.buttonMask) != 0;
+		bool down = (state.dpad & mapDpadDown.buttonMask) != 0;
+		state.dpad &= ~(mapDpadUp.buttonMask | mapDpadDown.buttonMask);
 		if (up)
-			state.dpad |= mapDpadDown->buttonMask;
+			state.dpad |= mapDpadDown.buttonMask;
 		if (down)
-			state.dpad |= mapDpadUp->buttonMask;
+			state.dpad |= mapDpadUp.buttonMask;
 	}
 
 	// 4-way before SOCD, might have better history without losing any coherent functionality
@@ -318,94 +267,102 @@ void Gamepad::process()
 	}
 }
 
-void Gamepad::read()
+void __not_in_flash_func(Gamepad::read)()
 {
-	Mask_t values = Storage::getInstance().GetGamepad()->debouncedGpio;
+	// Use member variable directly instead of going through Storage
+	Mask_t values = debouncedGpio;
 
-	// Get the midpoint value for the current mode
-	uint16_t joystickMid = GAMEPAD_JOYSTICK_MID;
-	if ( DriverManager::getInstance().getDriver() != nullptr ) {
-		joystickMid = DriverManager::getInstance().getDriver()->GetJoystickMidValue();
+	// Cache joystick mid value (only fetched once, value doesn't change at runtime)
+	static uint16_t cachedJoystickMid = 0;
+	static bool joystickMidCached = false;
+	uint16_t joystickMid;
+	if (joystickMidCached) [[likely]] {
+		joystickMid = cachedJoystickMid;
+	} else {
+		GPDriver* driver = DriverManager::getInstance().getDriver();
+		joystickMid = (driver != nullptr) ? driver->GetJoystickMidValue() : GAMEPAD_JOYSTICK_MID;
+		cachedJoystickMid = joystickMid;
+		joystickMidCached = true;
 	}
 
 	state.aux = 0
-		| (values & mapButtonFn->pinMask)   ? mapButtonFn->buttonMask : 0;
+		| (values & mapButtonFn.pinMask)   ? mapButtonFn.buttonMask : 0;
 
 	state.dpad = 0
-		| ((values & mapDpadUp->pinMask)       ? mapDpadUp->buttonMask              : 0)
-		| ((values & mapDpadDown->pinMask)     ? mapDpadDown->buttonMask            : 0)
-		| ((values & mapDpadLeft->pinMask)     ? mapDpadLeft->buttonMask            : 0)
-		| ((values & mapDpadRight->pinMask)    ? mapDpadRight->buttonMask           : 0)
-		| ((values & mapDigitalUp->pinMask)    ? (mapDigitalUp->buttonMask << 4)    : 0)
-		| ((values & mapDigitalDown->pinMask)  ? (mapDigitalDown->buttonMask << 4)  : 0)
-		| ((values & mapDigitalLeft->pinMask)  ? (mapDigitalLeft->buttonMask << 4)  : 0)
-		| ((values & mapDigitalRight->pinMask) ? (mapDigitalRight->buttonMask << 4) : 0)
+		| ((values & mapDpadUp.pinMask)       ? mapDpadUp.buttonMask              : 0)
+		| ((values & mapDpadDown.pinMask)     ? mapDpadDown.buttonMask            : 0)
+		| ((values & mapDpadLeft.pinMask)     ? mapDpadLeft.buttonMask            : 0)
+		| ((values & mapDpadRight.pinMask)    ? mapDpadRight.buttonMask           : 0)
+		| ((values & mapDigitalUp.pinMask)    ? (mapDigitalUp.buttonMask << 4)    : 0)
+		| ((values & mapDigitalDown.pinMask)  ? (mapDigitalDown.buttonMask << 4)  : 0)
+		| ((values & mapDigitalLeft.pinMask)  ? (mapDigitalLeft.buttonMask << 4)  : 0)
+		| ((values & mapDigitalRight.pinMask) ? (mapDigitalRight.buttonMask << 4) : 0)
 	;
 
 	state.buttons = 0
-		| ((values & mapButtonB1->pinMask)  ? mapButtonB1->buttonMask  : 0)
-		| ((values & mapButtonB2->pinMask)  ? mapButtonB2->buttonMask  : 0)
-		| ((values & mapButtonB3->pinMask)  ? mapButtonB3->buttonMask  : 0)
-		| ((values & mapButtonB4->pinMask)  ? mapButtonB4->buttonMask  : 0)
-		| ((values & mapButtonL1->pinMask)  ? mapButtonL1->buttonMask  : 0)
-		| ((values & mapButtonR1->pinMask)  ? mapButtonR1->buttonMask  : 0)
-		| ((values & mapButtonL2->pinMask)  ? mapButtonL2->buttonMask  : 0)
-		| ((values & mapButtonR2->pinMask)  ? mapButtonR2->buttonMask  : 0)
-		| ((values & mapButtonS1->pinMask)  ? mapButtonS1->buttonMask  : 0)
-		| ((values & mapButtonS2->pinMask)  ? mapButtonS2->buttonMask  : 0)
-		| ((values & mapButtonL3->pinMask)  ? mapButtonL3->buttonMask  : 0)
-		| ((values & mapButtonR3->pinMask)  ? mapButtonR3->buttonMask  : 0)
-		| ((values & mapButtonA1->pinMask)  ? mapButtonA1->buttonMask  : 0)
-		| ((values & mapButtonA2->pinMask)  ? mapButtonA2->buttonMask  : 0)
-		| ((values & mapButtonA3->pinMask)  ? mapButtonA3->buttonMask  : 0)
-		| ((values & mapButtonA4->pinMask)  ? mapButtonA4->buttonMask  : 0)
-		| ((values & mapButtonE1->pinMask)  ? mapButtonE1->buttonMask  : 0)
-		| ((values & mapButtonE2->pinMask)  ? mapButtonE2->buttonMask  : 0)
-		| ((values & mapButtonE3->pinMask)  ? mapButtonE3->buttonMask  : 0)
-		| ((values & mapButtonE4->pinMask)  ? mapButtonE4->buttonMask  : 0)
-		| ((values & mapButtonE5->pinMask)  ? mapButtonE5->buttonMask  : 0)
-		| ((values & mapButtonE6->pinMask)  ? mapButtonE6->buttonMask  : 0)
-		| ((values & mapButtonE7->pinMask)  ? mapButtonE7->buttonMask  : 0)
-		| ((values & mapButtonE8->pinMask)  ? mapButtonE8->buttonMask  : 0)
-		| ((values & mapButtonE9->pinMask)  ? mapButtonE9->buttonMask  : 0)
-		| ((values & mapButtonE10->pinMask) ? mapButtonE10->buttonMask : 0)
-		| ((values & mapButtonE11->pinMask) ? mapButtonE11->buttonMask : 0)
-		| ((values & mapButtonE12->pinMask) ? mapButtonE12->buttonMask : 0)
+		| ((values & mapButtonB1.pinMask)  ? mapButtonB1.buttonMask  : 0)
+		| ((values & mapButtonB2.pinMask)  ? mapButtonB2.buttonMask  : 0)
+		| ((values & mapButtonB3.pinMask)  ? mapButtonB3.buttonMask  : 0)
+		| ((values & mapButtonB4.pinMask)  ? mapButtonB4.buttonMask  : 0)
+		| ((values & mapButtonL1.pinMask)  ? mapButtonL1.buttonMask  : 0)
+		| ((values & mapButtonR1.pinMask)  ? mapButtonR1.buttonMask  : 0)
+		| ((values & mapButtonL2.pinMask)  ? mapButtonL2.buttonMask  : 0)
+		| ((values & mapButtonR2.pinMask)  ? mapButtonR2.buttonMask  : 0)
+		| ((values & mapButtonS1.pinMask)  ? mapButtonS1.buttonMask  : 0)
+		| ((values & mapButtonS2.pinMask)  ? mapButtonS2.buttonMask  : 0)
+		| ((values & mapButtonL3.pinMask)  ? mapButtonL3.buttonMask  : 0)
+		| ((values & mapButtonR3.pinMask)  ? mapButtonR3.buttonMask  : 0)
+		| ((values & mapButtonA1.pinMask)  ? mapButtonA1.buttonMask  : 0)
+		| ((values & mapButtonA2.pinMask)  ? mapButtonA2.buttonMask  : 0)
+		| ((values & mapButtonA3.pinMask)  ? mapButtonA3.buttonMask  : 0)
+		| ((values & mapButtonA4.pinMask)  ? mapButtonA4.buttonMask  : 0)
+		| ((values & mapButtonE1.pinMask)  ? mapButtonE1.buttonMask  : 0)
+		| ((values & mapButtonE2.pinMask)  ? mapButtonE2.buttonMask  : 0)
+		| ((values & mapButtonE3.pinMask)  ? mapButtonE3.buttonMask  : 0)
+		| ((values & mapButtonE4.pinMask)  ? mapButtonE4.buttonMask  : 0)
+		| ((values & mapButtonE5.pinMask)  ? mapButtonE5.buttonMask  : 0)
+		| ((values & mapButtonE6.pinMask)  ? mapButtonE6.buttonMask  : 0)
+		| ((values & mapButtonE7.pinMask)  ? mapButtonE7.buttonMask  : 0)
+		| ((values & mapButtonE8.pinMask)  ? mapButtonE8.buttonMask  : 0)
+		| ((values & mapButtonE9.pinMask)  ? mapButtonE9.buttonMask  : 0)
+		| ((values & mapButtonE10.pinMask) ? mapButtonE10.buttonMask : 0)
+		| ((values & mapButtonE11.pinMask) ? mapButtonE11.buttonMask : 0)
+		| ((values & mapButtonE12.pinMask) ? mapButtonE12.buttonMask : 0)
 	;
 
 	// set the effective dpad mode based on settings + overrides
-	if (values & mapButtonDP->pinMask)	activeDpadMode = DpadMode::DPAD_MODE_DIGITAL;
-	else if (values & mapButtonLS->pinMask)	activeDpadMode = DpadMode::DPAD_MODE_LEFT_ANALOG;
-	else if (values & mapButtonRS->pinMask)	activeDpadMode = DpadMode::DPAD_MODE_RIGHT_ANALOG;
+	if (values & mapButtonDP.pinMask)	activeDpadMode = DpadMode::DPAD_MODE_DIGITAL;
+	else if (values & mapButtonLS.pinMask)	activeDpadMode = DpadMode::DPAD_MODE_LEFT_ANALOG;
+	else if (values & mapButtonRS.pinMask)	activeDpadMode = DpadMode::DPAD_MODE_RIGHT_ANALOG;
 	else					activeDpadMode = options.dpadMode;
 
-	map48WayModeToggle = (values & map48WayMode->pinMask);
+	map48WayModeToggle = (values & map48WayMode.pinMask);
 
-	if (values & mapAnalogLSXNeg->pinMask) {
+	if (values & mapAnalogLSXNeg.pinMask) {
 		state.lx = GAMEPAD_JOYSTICK_MIN;
-	} else if (values & mapAnalogLSXPos->pinMask) {
+	} else if (values & mapAnalogLSXPos.pinMask) {
 		state.lx = GAMEPAD_JOYSTICK_MAX;
 	} else {
 		state.lx = joystickMid;
 	}
-	if (values & mapAnalogLSYNeg->pinMask) {
+	if (values & mapAnalogLSYNeg.pinMask) {
 		state.ly = GAMEPAD_JOYSTICK_MIN;
-	} else if (values & mapAnalogLSYPos->pinMask) {
+	} else if (values & mapAnalogLSYPos.pinMask) {
 		state.ly = GAMEPAD_JOYSTICK_MAX;
 	} else {
 		state.ly = joystickMid;
 	}
 
-	if (values & mapAnalogRSXNeg->pinMask) {
+	if (values & mapAnalogRSXNeg.pinMask) {
 		state.rx = GAMEPAD_JOYSTICK_MIN;
-	} else if (values & mapAnalogRSXPos->pinMask) {
+	} else if (values & mapAnalogRSXPos.pinMask) {
 		state.rx = GAMEPAD_JOYSTICK_MAX;
 	} else {
 		state.rx = joystickMid;
 	}
-	if (values & mapAnalogRSYNeg->pinMask) {
+	if (values & mapAnalogRSYNeg.pinMask) {
 		state.ry = GAMEPAD_JOYSTICK_MIN;
-	} else if (values & mapAnalogRSYPos->pinMask) {
+	} else if (values & mapAnalogRSYPos.pinMask) {
 		state.ry = GAMEPAD_JOYSTICK_MAX;
 	} else {
 		state.ry = joystickMid;
@@ -421,9 +378,9 @@ void Gamepad::hotkey() {
 
 	// Look for a hot-key
 	bool hasHotkey = false;
-	for(int i = 0; i < 16; i++) {
-		if (pressedHotkey(hotkeys[i])) {
-			processHotkeyAction(selectHotkey(hotkeys[i]));
+	for (auto& hotkey : hotkeys) {
+		if (pressedHotkey(hotkey)) {
+			processHotkeyAction(selectHotkey(hotkey));
 			hasHotkey = true;
 		}
 	}
@@ -530,6 +487,7 @@ void Gamepad::processHotkeyAction(GamepadHotkey action) {
 		case HOTKEY_A4_BUTTON:
 			state.buttons |= GAMEPAD_MASK_A4;
 			break;
+
 		case HOTKEY_DPAD_UP:
 			state.dpad |= GAMEPAD_MASK_UP;
 			break;

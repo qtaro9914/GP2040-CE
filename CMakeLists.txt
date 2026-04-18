@@ -163,6 +163,15 @@ add_compile_options(-Wall
         -Wno-unused-function # we have some for the docs that aren't called
         )
 
+# Optimization level: -O3 for Release builds, -O2 for Debug
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_compile_options(-O3)  # Maximum optimization for production
+    message(STATUS "Release build: Using -O3 optimization")
+else()
+    add_compile_options(-O2)  # Balanced optimization for development
+    message(STATUS "Debug build: Using -O2 optimization")
+endif()
+
 include(compile_proto.cmake)
 compile_proto()
 
@@ -186,6 +195,34 @@ endif()
 
 # We want a larger stack of 4kb per core instead of the default 2kb
 add_compile_definitions(PICO_STACK_SIZE=0x1000)
+
+# Addon build options - set to OFF to exclude from build
+option(GP2040_ADDON_DISPLAY "Build Display Addon" ON)
+option(GP2040_ADDON_NEOPIXEL "Build NeoPixel LED Addon" ON)
+option(GP2040_ADDON_TG16 "Build TG16 Input Addon" ON)
+option(GP2040_ADDON_WIIEXT "Build Wii Extension Addon" ON)
+option(GP2040_ADDON_TURBO "Build Turbo Addon" ON)
+option(GP2040_BENCHMARK "Enable Benchmark" OFF)
+
+# Pass addon options as compile definitions
+if(GP2040_ADDON_DISPLAY)
+  add_compile_definitions(GP2040_ADDON_DISPLAY=1)
+endif()
+if(GP2040_ADDON_NEOPIXEL)
+  add_compile_definitions(GP2040_ADDON_NEOPIXEL=1)
+endif()
+if(GP2040_ADDON_TG16)
+  add_compile_definitions(GP2040_ADDON_TG16=1)
+endif()
+if(GP2040_ADDON_WIIEXT)
+  add_compile_definitions(GP2040_ADDON_WIIEXT=1)
+endif()
+if(GP2040_ADDON_TURBO)
+  add_compile_definitions(GP2040_ADDON_TURBO=1)
+endif()
+if(GP2040_BENCHMARK)
+  add_compile_definitions(GP2040_BENCHMARK=1)
+endif()
 
 add_executable(${PROJECT_NAME}
 src/main.cpp
@@ -370,6 +407,19 @@ target_include_directories(${PROJECT_NAME}  PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
   )
+
+# Enable UART serial output for debugging and benchmarking
+# Note: USB CDC cannot be used because GP2040-CE uses TinyUSB host mode (conflict)
+# UART output requires a USB-UART adapter connected to GPIO 0 (TX) and GPIO 1 (RX)
+if(GP2040_BENCHMARK)
+    pico_enable_stdio_usb(${PROJECT_NAME} 0)   # Cannot use (conflicts with TinyUSB host)
+    pico_enable_stdio_uart(${PROJECT_NAME} 1)  # Use UART - GPIO 0 (TX), GPIO 1 (RX)
+    message(STATUS "Benchmark mode: UART serial output enabled on GPIO 0 (TX), GPIO 1 (RX)")
+    message(WARNING "Benchmark output requires USB-UART adapter connected to GPIO 0 and GPIO 1")
+else()
+    pico_enable_stdio_usb(${PROJECT_NAME} 0)
+    pico_enable_stdio_uart(${PROJECT_NAME} 0)
+endif()
 
 pico_add_extra_outputs(${PROJECT_NAME})
 

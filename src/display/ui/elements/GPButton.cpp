@@ -45,33 +45,33 @@ void GPButton::draw() {
         useMask = true;
 
         if ((this->_inputMask & GAMEPAD_MASK_B1) == GAMEPAD_MASK_B1) {
-            mapMask = getGamepad()->mapButtonB1;
+            mapMask = &getGamepad()->mapButtonB1;
         } else if ((this->_inputMask & GAMEPAD_MASK_B2) == GAMEPAD_MASK_B2) {
-            mapMask = getGamepad()->mapButtonB2;
+            mapMask = &getGamepad()->mapButtonB2;
         } else if ((this->_inputMask & GAMEPAD_MASK_B3) == GAMEPAD_MASK_B3) {
-            mapMask = getGamepad()->mapButtonB3;
+            mapMask = &getGamepad()->mapButtonB3;
         } else if ((this->_inputMask & GAMEPAD_MASK_B4) == GAMEPAD_MASK_B4) {
-            mapMask = getGamepad()->mapButtonB4;
+            mapMask = &getGamepad()->mapButtonB4;
         } else if ((this->_inputMask & GAMEPAD_MASK_L1) == GAMEPAD_MASK_L1) {
-            mapMask = getGamepad()->mapButtonL1;
+            mapMask = &getGamepad()->mapButtonL1;
         } else if ((this->_inputMask & GAMEPAD_MASK_R1) == GAMEPAD_MASK_R1) {
-            mapMask = getGamepad()->mapButtonR1;
+            mapMask = &getGamepad()->mapButtonR1;
         } else if ((this->_inputMask & GAMEPAD_MASK_L2) == GAMEPAD_MASK_L2) {
-            mapMask = getGamepad()->mapButtonL2;
+            mapMask = &getGamepad()->mapButtonL2;
         } else if ((this->_inputMask & GAMEPAD_MASK_R2) == GAMEPAD_MASK_R2) {
-            mapMask = getGamepad()->mapButtonR2;
+            mapMask = &getGamepad()->mapButtonR2;
         } else if ((this->_inputMask & GAMEPAD_MASK_S1) == GAMEPAD_MASK_S1) {
-            mapMask = getGamepad()->mapButtonS1;
+            mapMask = &getGamepad()->mapButtonS1;
         } else if ((this->_inputMask & GAMEPAD_MASK_S2) == GAMEPAD_MASK_S2) {
-            mapMask = getGamepad()->mapButtonS2;
+            mapMask = &getGamepad()->mapButtonS2;
         } else if ((this->_inputMask & GAMEPAD_MASK_L3) == GAMEPAD_MASK_L3) {
-            mapMask = getGamepad()->mapButtonL3;
+            mapMask = &getGamepad()->mapButtonL3;
         } else if ((this->_inputMask & GAMEPAD_MASK_R3) == GAMEPAD_MASK_R3) {
-            mapMask = getGamepad()->mapButtonR3;
+            mapMask = &getGamepad()->mapButtonR3;
         } else if ((this->_inputMask & GAMEPAD_MASK_A1) == GAMEPAD_MASK_A1) {
-            mapMask = getGamepad()->mapButtonA1;
+            mapMask = &getGamepad()->mapButtonA1;
         } else if ((this->_inputMask & GAMEPAD_MASK_A2) == GAMEPAD_MASK_A2) {
-            mapMask = getGamepad()->mapButtonA2;
+            mapMask = &getGamepad()->mapButtonA2;
         }
         turboState = (getGamepad()->turboState.buttons & this->_inputMask);
     } else if (_inputType == GP_ELEMENT_DIR_BUTTON) {
@@ -80,13 +80,13 @@ void GPButton::draw() {
         useMask = true;
 
         if ((this->_inputMask & GAMEPAD_MASK_UP) == GAMEPAD_MASK_UP) {
-            mapMask = getGamepad()->mapDpadUp;
+            mapMask = &getGamepad()->mapDpadUp;
         } else if ((this->_inputMask & GAMEPAD_MASK_DOWN) == GAMEPAD_MASK_DOWN) {
-            mapMask = getGamepad()->mapDpadDown;
+            mapMask = &getGamepad()->mapDpadDown;
         } else if ((this->_inputMask & GAMEPAD_MASK_LEFT) == GAMEPAD_MASK_LEFT) {
-            mapMask = getGamepad()->mapDpadLeft;
+            mapMask = &getGamepad()->mapDpadLeft;
         } else if ((this->_inputMask & GAMEPAD_MASK_RIGHT) == GAMEPAD_MASK_RIGHT) {
-            mapMask = getGamepad()->mapDpadRight;
+            mapMask = &getGamepad()->mapDpadRight;
         }
     } else if (_inputType == GP_ELEMENT_PIN_BUTTON) {
         // physical pin

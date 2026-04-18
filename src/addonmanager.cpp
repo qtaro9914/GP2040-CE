@@ -1,60 +1,64 @@
 #include "addonmanager.h"
 #include "usbhostmanager.h"
 
-bool AddonManager::LoadAddon(GPAddon* addon) {
+bool AddonManager::LoadAddon(std::unique_ptr<GPAddon> addon) {
     if (addon->available()) {
-        AddonBlock * block = new AddonBlock;
+        auto block = std::make_unique<AddonBlock>();
         addon->setup();
-        block->ptr = addon;
-        addons.push_back(block);
+        // Add to categorized lists for optimized iteration
+        preprocessList.push_back(addon.get());
+        processList.push_back(addon.get());
+        postprocessList.push_back(addon.get());
+
+        block->ptr = std::move(addon);
+        addons.push_back(std::move(block));
+        
+        
         return true;
-    } else {
-        delete addon; // Don't use the memory if we don't have to   
-    }
+    } 
+    // unique_ptr will handle deletion if not moved
 
     return false;
 }
 
-bool AddonManager::LoadUSBAddon(GPAddon* addon) {
-    bool ret = LoadAddon(addon);
-    if ( ret == true )
-        USBHostManager::getInstance().pushListener(addon->getListener());
-    return ret;
+bool AddonManager::LoadUSBAddon(std::unique_ptr<GPAddon> addon) {
+    auto listener = addon->getListener(); // Get listener before moving addon
+    if (LoadAddon(std::move(addon))) {
+        USBHostManager::getInstance().pushListener(listener);
+        return true;
+    }
+    return false;
 }
 
 void AddonManager::ReinitializeAddons() {
-    // Loop through all addons and process any that match our type
-    for (std::vector<AddonBlock*>::iterator it = addons.begin(); it != addons.end(); it++) {
-        (*it)->ptr->reinit();
+    for (const auto& block : addons) {
+        block->ptr->reinit();
     }
 }
 
 void AddonManager::PreprocessAddons() {
-    // Loop through all addons and process any that match our type
-    for (std::vector<AddonBlock*>::iterator it = addons.begin(); it != addons.end(); it++) {
-        (*it)->ptr->preprocess();
+    for (GPAddon* addon : preprocessList) {
+        addon->preprocess();
     }
 }
 
 void AddonManager::ProcessAddons() {
-    // Loop through all addons and process any that match our type
-    for (std::vector<AddonBlock*>::iterator it = addons.begin(); it != addons.end(); it++) {
-        (*it)->ptr->process();
+    for (GPAddon* addon : processList) {
+        addon->process();
     }
 }
 
 void AddonManager::PostprocessAddons(bool reportSent) {
-    // Loop through all addons and process any that match our type
-    for (std::vector<AddonBlock*>::iterator it = addons.begin(); it != addons.end(); it++) {
-        (*it)->ptr->postprocess(reportSent);
+    for (GPAddon* addon : postprocessList) {
+        addon->postprocess(reportSent);
     }
 }
 
 // HACK : change this for NeoPicoLED
 GPAddon * AddonManager::GetAddon(std::string name) { // hack for NeoPicoLED
-    for (std::vector<AddonBlock*>::iterator it = addons.begin(); it != addons.end(); it++) {
-        if ( (*it)->ptr->name() == name )
-            return (*it)->ptr;
+    for (const auto& block : addons) {
+        if ( block->ptr->name() == name )
+            return block->ptr.get();
     }
     return nullptr;
 }

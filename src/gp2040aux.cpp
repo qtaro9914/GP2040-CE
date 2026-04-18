@@ -8,9 +8,13 @@
 
 #include "addons/board_led.h"  // Add-Ons
 #include "addons/buzzerspeaker.h"
+#ifdef GP2040_ADDON_DISPLAY
 #include "addons/display.h"
+#endif
 #include "addons/pleds.h"
+#ifdef GP2040_ADDON_NEOPIXEL
 #include "addons/neopicoleds.h"
+#endif
 #include "addons/reactiveleds.h"
 #include "addons/drv8833_rumble.h"
 
@@ -38,13 +42,17 @@ void GP2040Aux::setup() {
 	}
 
 	// Setup Add-ons
-	addons.LoadAddon(new DisplayAddon());
-	addons.LoadAddon(new NeoPicoLEDAddon());
-	addons.LoadAddon(new PlayerLEDAddon());
-	addons.LoadAddon(new BoardLedAddon());
-	addons.LoadAddon(new BuzzerSpeakerAddon());
-	addons.LoadAddon(new DRV8833RumbleAddon());
-	addons.LoadAddon(new ReactiveLEDAddon());
+#ifdef GP2040_ADDON_DISPLAY
+	addons.LoadAddon(std::make_unique<DisplayAddon>());
+#endif
+#ifdef GP2040_ADDON_NEOPIXEL
+	addons.LoadAddon(std::make_unique<NeoPicoLEDAddon>());
+#endif
+	addons.LoadAddon(std::make_unique<PlayerLEDAddon>());
+	addons.LoadAddon(std::make_unique<BoardLedAddon>());
+	addons.LoadAddon(std::make_unique<BuzzerSpeakerAddon>());
+	addons.LoadAddon(std::make_unique<DRV8833RumbleAddon>());
+	addons.LoadAddon(std::make_unique<ReactiveLEDAddon>());
 
 	// Ready to sync Core0 and Core1
 	isReady = true;

@@ -80,11 +80,11 @@ uint8_t TG16padInput::readController()
     uint8_t a = 0, b = 0, c = 0;
     // Set OE active (active low)
     CLR_PIN(tg16Options.oePin);
-    sleep_ms(1);
+    sleep_us(5);  // PCE protocol requires ~2μs settling time (see PCE_Controller_Info)
 
     // SELECT high, read first nibble
     SET_PIN(tg16Options.selectPin);
-    sleep_ms(1);
+    sleep_us(5);  // PCE protocol requires ~2μs settling time
     for (int i = 0; i < 4; ++i)
     {
         if (!READ_PIN(dataPins[i])) // active low
@@ -95,7 +95,7 @@ uint8_t TG16padInput::readController()
 
     // SELECT low, read second nibble
     CLR_PIN(tg16Options.selectPin);
-    sleep_ms(1);
+    sleep_us(5);  // PCE protocol requires ~2μs settling time
     for (int i = 0; i < 4; ++i)
     {
         if (!READ_PIN(dataPins[i])) // active low
@@ -108,7 +108,7 @@ uint8_t TG16padInput::readController()
     if (sixButtonMode) {
         // SELECT high again
         SET_PIN(tg16Options.selectPin);
-        sleep_ms(1);
+        sleep_us(5);  // PCE protocol requires ~2μs settling time
         for (int i = 0; i < 4; ++i)
         {
             if (!READ_PIN(dataPins[i])) // active low

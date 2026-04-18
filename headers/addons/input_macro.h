@@ -52,6 +52,7 @@ private:
     int macroPosition;
     uint32_t macroButtonMask;
     uint32_t macroPinMasks[6];
+    bool anyMacroConfigured;  // Cached flag: true if any macro pin/button is configured
     uint64_t macroStartTime;
     uint64_t currentMicros;
     int pressedMacro;

@@ -23,58 +23,58 @@
 void DriverManager::setup(InputMode mode) {
     switch (mode) {
         case INPUT_MODE_CONFIG:
-            driver = new NetDriver();
+            driver = std::make_unique<NetDriver>();
             break;
         case INPUT_MODE_ASTRO:
-            driver = new AstroDriver();
+            driver = std::make_unique<AstroDriver>();
             break;
         case INPUT_MODE_EGRET:
-            driver = new EgretDriver();
+            driver = std::make_unique<EgretDriver>();
             break;
         case INPUT_MODE_KEYBOARD:
-            driver = new KeyboardDriver();
+            driver = std::make_unique<KeyboardDriver>();
             break;
         case INPUT_MODE_GENERIC:
-            driver = new HIDDriver();
+            driver = std::make_unique<HIDDriver>();
             break;
         case INPUT_MODE_MDMINI:
-            driver = new MDMiniDriver();
+            driver = std::make_unique<MDMiniDriver>();
             break;
         case INPUT_MODE_NEOGEO:
-            driver = new NeoGeoDriver();
+            driver = std::make_unique<NeoGeoDriver>();
             break;
         case INPUT_MODE_PSCLASSIC:
-            driver = new PSClassicDriver();
+            driver = std::make_unique<PSClassicDriver>();
             break;
         case INPUT_MODE_PCEMINI:
-            driver = new PCEngineDriver();
+            driver = std::make_unique<PCEngineDriver>();
             break;
         case INPUT_MODE_PS3:
-            driver = new PS3Driver();
+            driver = std::make_unique<PS3Driver>();
             break;
         case INPUT_MODE_PS4:
-            driver = new PS4Driver(PS4_CONTROLLER);
+            driver = std::make_unique<PS4Driver>(PS4_CONTROLLER);
             break;
         case INPUT_MODE_PS5:
-            driver = new PS4Driver(PS4_ARCADESTICK);
+            driver = std::make_unique<PS4Driver>(PS4_ARCADESTICK);
             break;
         case INPUT_MODE_P5GENERAL:
-            driver = new P5GeneralDriver();
+            driver = std::make_unique<P5GeneralDriver>();
             break;
         case INPUT_MODE_SWITCH:
-            driver = new SwitchDriver();
+            driver = std::make_unique<SwitchDriver>();
             break;
         case INPUT_MODE_XBONE:
-            driver = new XBOneDriver();
+            driver = std::make_unique<XBOneDriver>();
             break;
         case INPUT_MODE_XBOXORIGINAL:
-            driver = new XboxOriginalDriver();
+            driver = std::make_unique<XboxOriginalDriver>();
             break;
         case INPUT_MODE_XINPUT:
-            driver = new XInputDriver();
+            driver = std::make_unique<XInputDriver>();
             break;
         case INPUT_MODE_SWITCH_PRO:
-            driver = new SwitchProDriver();
+            driver = std::make_unique<SwitchProDriver>();
             break;
         default:
             return;

@@ -57,6 +57,13 @@ void InputMacro::setup() {
                 break;
         }
     }
+    // Cache whether any macro is configured for fast path in preprocess()
+    anyMacroConfigured = (macroButtonMask != 0);
+    for (int i = 0; i < MAX_MACRO_LIMIT && !anyMacroConfigured; i++) {
+        if (macroPinMasks[i] != 0) {
+            anyMacroConfigured = true;
+        }
+    }
 
     inputMacroOptions = &Storage::getInstance().getAddonOptions().macroOptions;
     if (inputMacroOptions->macroBoardLedEnabled && isValidPin(BOARD_LED_PIN)) {
@@ -243,12 +250,18 @@ void InputMacro::runCurrentMacro() {
 
 void InputMacro::preprocess()
 {
+    // Fast path: skip processing if no macro is running and no macros are configured
+    // anyMacroConfigured is cached in reinit() to avoid per-frame iteration
+    if (!isMacroRunning && !anyMacroConfigured) {
+        return;
+    }
+
     FocusModeOptions * focusModeOptions = &Storage::getInstance().getAddonOptions().focusModeOptions;
     if (focusModeOptions->enabled && focusModeOptions->macroLockEnabled) {
         Gamepad * gamepad = Storage::getInstance().GetGamepad();
         // Override Toggle Pressed OR focus mode pin is set
         if (focusModeOptions->overrideEnabled ||
-            (gamepad->mapFocusMode->pinMask && (gamepad->debouncedGpio & gamepad->mapFocusMode->pinMask))) {
+            (gamepad->mapFocusMode.pinMask && (gamepad->debouncedGpio & gamepad->mapFocusMode.pinMask))) {
             return;
         }
     }
@@ -288,6 +301,13 @@ void InputMacro::reinit() {
                 break;
             default:
                 break;
+        }
+    }
+    // Cache whether any macro is configured for fast path in preprocess()
+    anyMacroConfigured = (macroButtonMask != 0);
+    for (int i = 0; i < MAX_MACRO_LIMIT && !anyMacroConfigured; i++) {
+        if (macroPinMasks[i] != 0) {
+            anyMacroConfigured = true;
         }
     }
 }

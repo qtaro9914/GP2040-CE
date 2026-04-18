@@ -6,8 +6,6 @@
 #pragma once
 
 #include <stdint.h>
-#include <list>
-using namespace std;
 #include "GamepadEnums.h"
 #include "enums.pb.h"
 
@@ -159,8 +157,6 @@ uint16_t dpadToAnalogX(uint8_t dpad);
 uint16_t dpadToAnalogY(uint8_t dpad);
 
 uint8_t getMaskFromDirection(DpadDirection direction);
-
-uint8_t updateDpad(uint8_t dpad, DpadDirection direction);
 
 /**
  * @brief Filter diagonals out of the dpad, making the device work as a 4-way lever.

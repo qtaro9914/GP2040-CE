@@ -5,6 +5,7 @@
 #include "types.h"
 #include <string.h>
 #include <string>
+#include <memory>
 
 #include "enums.pb.h"
 #include "gamepad/GamepadState.h"
@@ -139,56 +140,56 @@ public:
 	GamepadState state;
 	GamepadState turboState;
 	GamepadAuxState auxState;
-	GamepadButtonMapping *mapDpadUp;
-	GamepadButtonMapping *mapDpadDown;
-	GamepadButtonMapping *mapDpadLeft;
-	GamepadButtonMapping *mapDpadRight;
-	GamepadButtonMapping *mapButtonB1;
-	GamepadButtonMapping *mapButtonB2;
-	GamepadButtonMapping *mapButtonB3;
-	GamepadButtonMapping *mapButtonB4;
-	GamepadButtonMapping *mapButtonL1;
-	GamepadButtonMapping *mapButtonR1;
-	GamepadButtonMapping *mapButtonL2;
-	GamepadButtonMapping *mapButtonR2;
-	GamepadButtonMapping *mapButtonS1;
-	GamepadButtonMapping *mapButtonS2;
-	GamepadButtonMapping *mapButtonL3;
-	GamepadButtonMapping *mapButtonR3;
-	GamepadButtonMapping *mapButtonA1;
-	GamepadButtonMapping *mapButtonA2;
-	GamepadButtonMapping *mapButtonA3;
-	GamepadButtonMapping *mapButtonA4;
-	GamepadButtonMapping *mapButtonE1;
-	GamepadButtonMapping *mapButtonE2;
-	GamepadButtonMapping *mapButtonE3;
-	GamepadButtonMapping *mapButtonE4;
-	GamepadButtonMapping *mapButtonE5;
-	GamepadButtonMapping *mapButtonE6;
-	GamepadButtonMapping *mapButtonE7;
-	GamepadButtonMapping *mapButtonE8;
-	GamepadButtonMapping *mapButtonE9;
-	GamepadButtonMapping *mapButtonE10;
-	GamepadButtonMapping *mapButtonE11;
-	GamepadButtonMapping *mapButtonE12;
-	GamepadButtonMapping *mapButtonFn;
-	GamepadButtonMapping *mapButtonDP;
-	GamepadButtonMapping *mapButtonLS;
-	GamepadButtonMapping *mapButtonRS;
-	GamepadButtonMapping *mapDigitalUp;
-	GamepadButtonMapping *mapDigitalDown;
-	GamepadButtonMapping *mapDigitalLeft;
-	GamepadButtonMapping *mapDigitalRight;
-	GamepadButtonMapping *mapAnalogLSXNeg;
-	GamepadButtonMapping *mapAnalogLSXPos;
-	GamepadButtonMapping *mapAnalogLSYNeg;
-	GamepadButtonMapping *mapAnalogLSYPos;
-	GamepadButtonMapping *mapAnalogRSXNeg;
-	GamepadButtonMapping *mapAnalogRSXPos;
-	GamepadButtonMapping *mapAnalogRSYNeg;
-	GamepadButtonMapping *mapAnalogRSYPos;
-	GamepadButtonMapping *map48WayMode;
-	GamepadButtonMapping *mapFocusMode;
+	GamepadButtonMapping mapDpadUp {GAMEPAD_MASK_UP};
+	GamepadButtonMapping mapDpadDown {GAMEPAD_MASK_DOWN};
+	GamepadButtonMapping mapDpadLeft {GAMEPAD_MASK_LEFT};
+	GamepadButtonMapping mapDpadRight {GAMEPAD_MASK_RIGHT};
+	GamepadButtonMapping mapButtonB1 {GAMEPAD_MASK_B1};
+	GamepadButtonMapping mapButtonB2 {GAMEPAD_MASK_B2};
+	GamepadButtonMapping mapButtonB3 {GAMEPAD_MASK_B3};
+	GamepadButtonMapping mapButtonB4 {GAMEPAD_MASK_B4};
+	GamepadButtonMapping mapButtonL1 {GAMEPAD_MASK_L1};
+	GamepadButtonMapping mapButtonR1 {GAMEPAD_MASK_R1};
+	GamepadButtonMapping mapButtonL2 {GAMEPAD_MASK_L2};
+	GamepadButtonMapping mapButtonR2 {GAMEPAD_MASK_R2};
+	GamepadButtonMapping mapButtonS1 {GAMEPAD_MASK_S1};
+	GamepadButtonMapping mapButtonS2 {GAMEPAD_MASK_S2};
+	GamepadButtonMapping mapButtonL3 {GAMEPAD_MASK_L3};
+	GamepadButtonMapping mapButtonR3 {GAMEPAD_MASK_R3};
+	GamepadButtonMapping mapButtonA1 {GAMEPAD_MASK_A1};
+	GamepadButtonMapping mapButtonA2 {GAMEPAD_MASK_A2};
+	GamepadButtonMapping mapButtonA3 {GAMEPAD_MASK_A3};
+	GamepadButtonMapping mapButtonA4 {GAMEPAD_MASK_A4};
+	GamepadButtonMapping mapButtonE1 {GAMEPAD_MASK_E1};
+	GamepadButtonMapping mapButtonE2 {GAMEPAD_MASK_E2};
+	GamepadButtonMapping mapButtonE3 {GAMEPAD_MASK_E3};
+	GamepadButtonMapping mapButtonE4 {GAMEPAD_MASK_E4};
+	GamepadButtonMapping mapButtonE5 {GAMEPAD_MASK_E5};
+	GamepadButtonMapping mapButtonE6 {GAMEPAD_MASK_E6};
+	GamepadButtonMapping mapButtonE7 {GAMEPAD_MASK_E7};
+	GamepadButtonMapping mapButtonE8 {GAMEPAD_MASK_E8};
+	GamepadButtonMapping mapButtonE9 {GAMEPAD_MASK_E9};
+	GamepadButtonMapping mapButtonE10 {GAMEPAD_MASK_E10};
+	GamepadButtonMapping mapButtonE11 {GAMEPAD_MASK_E11};
+	GamepadButtonMapping mapButtonE12 {GAMEPAD_MASK_E12};
+	GamepadButtonMapping mapButtonFn {AUX_MASK_FUNCTION};
+	GamepadButtonMapping mapButtonDP {SUSTAIN_DP_MODE_DP};
+	GamepadButtonMapping mapButtonLS {SUSTAIN_DP_MODE_LS};
+	GamepadButtonMapping mapButtonRS {SUSTAIN_DP_MODE_RS};
+	GamepadButtonMapping mapDigitalUp {GAMEPAD_MASK_UP};
+	GamepadButtonMapping mapDigitalDown {GAMEPAD_MASK_DOWN};
+	GamepadButtonMapping mapDigitalLeft {GAMEPAD_MASK_LEFT};
+	GamepadButtonMapping mapDigitalRight {GAMEPAD_MASK_RIGHT};
+	GamepadButtonMapping mapAnalogLSXNeg {ANALOG_DIRECTION_LS_X_NEG};
+	GamepadButtonMapping mapAnalogLSXPos {ANALOG_DIRECTION_LS_X_POS};
+	GamepadButtonMapping mapAnalogLSYNeg {ANALOG_DIRECTION_LS_Y_NEG};
+	GamepadButtonMapping mapAnalogLSYPos {ANALOG_DIRECTION_LS_Y_POS};
+	GamepadButtonMapping mapAnalogRSXNeg {ANALOG_DIRECTION_RS_X_NEG};
+	GamepadButtonMapping mapAnalogRSXPos {ANALOG_DIRECTION_RS_X_POS};
+	GamepadButtonMapping mapAnalogRSYNeg {ANALOG_DIRECTION_RS_Y_NEG};
+	GamepadButtonMapping mapAnalogRSYPos {ANALOG_DIRECTION_RS_Y_POS};
+	GamepadButtonMapping map48WayMode {SUSTAIN_4_8_WAY_MODE};
+	GamepadButtonMapping mapFocusMode {SUSTAIN_FOCUS_MODE};
 
 	// gamepad specific proxy of debounced buttons --- 1 = active (inverse of the raw GPIO)
 	// see GP2040::debounceGpioGetAll for details

@@ -39,10 +39,10 @@ void ReverseInput::setup()
     actionRight = options.actionRight;
 
     Gamepad * gamepad = Storage::getInstance().GetGamepad();
-    mapDpadUp    = gamepad->mapDpadUp;
-    mapDpadDown  = gamepad->mapDpadDown;
-    mapDpadLeft  = gamepad->mapDpadLeft;
-    mapDpadRight = gamepad->mapDpadRight;
+    mapDpadUp    = &gamepad->mapDpadUp;
+    mapDpadDown  = &gamepad->mapDpadDown;
+    mapDpadLeft  = &gamepad->mapDpadLeft;
+    mapDpadRight = &gamepad->mapDpadRight;
 
     invertXAxis = gamepad->getOptions().invertXAxis;
     invertYAxis = gamepad->getOptions().invertYAxis;
