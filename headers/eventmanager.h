@@ -27,11 +27,10 @@
 class EventManager {
     public:
         typedef std::function<void(GPEvent* event)> EventFunction;
-        typedef std::pair<GPEventType, std::vector<EventFunction>> EventEntry;
 
         EventManager(EventManager const&) = delete;
         void operator=(EventManager const&)  = delete;
-        static EventManager& getInstance() // Thread-safe storage ensures cross-thread talk
+        static EventManager& getInstance()
         {
             static EventManager instance;
             return instance;
@@ -42,11 +41,12 @@ class EventManager {
 
         void registerEventHandler(GPEventType eventType, EventFunction handler);
         void unregisterEventHandler(GPEventType eventType, EventFunction handler);
-        void triggerEvent(GPEvent* event);
+        void triggerEvent(GPEvent& event);
+        void triggerEvent(GPEvent* event) { triggerEvent(*event); delete event; }
     private:
         EventManager(){}
 
-        std::vector<EventEntry> eventList;
+        std::array<std::vector<EventFunction>, _GPEventType_ARRAYSIZE> eventHandlers;
 };
 
 #endif

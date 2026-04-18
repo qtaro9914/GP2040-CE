@@ -413,7 +413,8 @@ void GP2040::getReinitGamepad(Gamepad * gamepad) {
 		gamepad->lastReinitProfileNumber = currentProfile;
 
 		// Trigger the profile change event now that reinit is complete
-		EventManager::getInstance().triggerEvent(new GPProfileChangeEvent(previousProfile, currentProfile));
+		GPProfileChangeEvent profileEvt(previousProfile, currentProfile);
+		EventManager::getInstance().triggerEvent(profileEvt);
 	}
 }
 
@@ -556,7 +557,8 @@ void GP2040::checkRawState(GamepadState prevState, GamepadState currState) {
         ((currState.dpad & ~prevState.dpad) != 0) ||
         ((currState.buttons & ~prevState.buttons) != 0)
     ) {
-        EventManager::getInstance().triggerEvent(new GPButtonDownEvent((currState.dpad & ~prevState.dpad), (currState.buttons & ~prevState.buttons), (currState.aux & ~prevState.aux)));
+        GPButtonDownEvent btnDownEvt((currState.dpad & ~prevState.dpad), (currState.buttons & ~prevState.buttons), (currState.aux & ~prevState.aux));
+        EventManager::getInstance().triggerEvent(btnDownEvt);
     }
 
     // buttons released
@@ -565,7 +567,8 @@ void GP2040::checkRawState(GamepadState prevState, GamepadState currState) {
         ((prevState.dpad & ~currState.dpad) != 0) ||
         ((prevState.buttons & ~currState.buttons) != 0)
     ) {
-        EventManager::getInstance().triggerEvent(new GPButtonUpEvent((prevState.dpad & ~currState.dpad), (prevState.buttons & ~currState.buttons), (prevState.aux & ~currState.aux)));
+        GPButtonUpEvent btnUpEvt((prevState.dpad & ~currState.dpad), (prevState.buttons & ~currState.buttons), (prevState.aux & ~currState.aux));
+        EventManager::getInstance().triggerEvent(btnUpEvt);
     }
 }
 
@@ -576,7 +579,8 @@ void GP2040::checkProcessedState(GamepadState prevState, GamepadState currState)
         ((currState.dpad & ~prevState.dpad) != 0) ||
         ((currState.buttons & ~prevState.buttons) != 0)
     ) {
-        EventManager::getInstance().triggerEvent(new GPButtonProcessedDownEvent((currState.dpad & ~prevState.dpad), (currState.buttons & ~prevState.buttons), (currState.aux & ~prevState.aux)));
+        GPButtonProcessedDownEvent btnProcDownEvt((currState.dpad & ~prevState.dpad), (currState.buttons & ~prevState.buttons), (currState.aux & ~prevState.aux));
+        EventManager::getInstance().triggerEvent(btnProcDownEvt);
     }
 
     // buttons released
@@ -585,7 +589,8 @@ void GP2040::checkProcessedState(GamepadState prevState, GamepadState currState)
         ((prevState.dpad & ~currState.dpad) != 0) ||
         ((prevState.buttons & ~currState.buttons) != 0)
     ) {
-        EventManager::getInstance().triggerEvent(new GPButtonProcessedUpEvent((prevState.dpad & ~currState.dpad), (prevState.buttons & ~currState.buttons), (prevState.aux & ~currState.aux)));
+        GPButtonProcessedUpEvent btnProcUpEvt((prevState.dpad & ~currState.dpad), (prevState.buttons & ~currState.buttons), (prevState.aux & ~currState.aux));
+        EventManager::getInstance().triggerEvent(btnProcUpEvt);
     }
 
     if (
@@ -596,7 +601,8 @@ void GP2040::checkProcessedState(GamepadState prevState, GamepadState currState)
         (currState.lt != prevState.lt) ||
         (currState.rt != prevState.rt)
     ) {
-        EventManager::getInstance().triggerEvent(new GPAnalogProcessedMoveEvent(currState.lx, currState.ly, currState.rx, currState.ry, currState.lt, currState.rt));
+        GPAnalogProcessedMoveEvent analogEvt(currState.lx, currState.ly, currState.rx, currState.ry, currState.lt, currState.rt);
+        EventManager::getInstance().triggerEvent(analogEvt);
     }
 }
 

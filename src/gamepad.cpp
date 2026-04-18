@@ -651,37 +651,44 @@ void Gamepad::processHotkeyAction(GamepadHotkey action) {
 			break;
 		case HOTKEY_MENU_NAV_UP:
 			if (action != lastAction) {
-                EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_UP));
+                GPMenuNavigateEvent menuUpEvt(GpioAction::MENU_NAVIGATION_UP);
+                EventManager::getInstance().triggerEvent(menuUpEvt);
             }
 			break;
 		case HOTKEY_MENU_NAV_DOWN:
 			if (action != lastAction) {
-                EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_DOWN));
+                GPMenuNavigateEvent menuDownEvt(GpioAction::MENU_NAVIGATION_DOWN);
+                EventManager::getInstance().triggerEvent(menuDownEvt);
             }
 			break;
 		case HOTKEY_MENU_NAV_LEFT:
 			if (action != lastAction) {
-                EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_LEFT));
+                GPMenuNavigateEvent menuLeftEvt(GpioAction::MENU_NAVIGATION_LEFT);
+                EventManager::getInstance().triggerEvent(menuLeftEvt);
             }
 			break;
 		case HOTKEY_MENU_NAV_RIGHT:
 			if (action != lastAction) {
-                EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_RIGHT));
+                GPMenuNavigateEvent menuRightEvt(GpioAction::MENU_NAVIGATION_RIGHT);
+                EventManager::getInstance().triggerEvent(menuRightEvt);
             }
 			break;
 		case HOTKEY_MENU_NAV_SELECT:
 			if (action != lastAction) {
-                EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_SELECT));
+                GPMenuNavigateEvent menuSelectEvt(GpioAction::MENU_NAVIGATION_SELECT);
+                EventManager::getInstance().triggerEvent(menuSelectEvt);
             }
 			break;
 		case HOTKEY_MENU_NAV_BACK:
 			if (action != lastAction) {
-                EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_BACK));
+                GPMenuNavigateEvent menuBackEvt(GpioAction::MENU_NAVIGATION_BACK);
+                EventManager::getInstance().triggerEvent(menuBackEvt);
             }
 			break;
 		case HOTKEY_MENU_NAV_TOGGLE:
 			if (action != lastAction) {
-				EventManager::getInstance().triggerEvent(new GPMenuNavigateEvent(GpioAction::MENU_NAVIGATION_TOGGLE));
+				GPMenuNavigateEvent menuToggleEvt(GpioAction::MENU_NAVIGATION_TOGGLE);
+				EventManager::getInstance().triggerEvent(menuToggleEvt);
 			}
 			break;
 		case HOTKEY_FOCUS_MODE_TOGGLE:
@@ -746,7 +753,8 @@ void Gamepad::processHotkeyAction(GamepadHotkey action) {
 
 	// only save if requested
 	if (reqSave) {
-		EventManager::getInstance().triggerEvent(new GPStorageSaveEvent(true));
+		GPStorageSaveEvent saveEvt(true);
+		EventManager::getInstance().triggerEvent(saveEvt);
 	}
 
 	lastAction = action;

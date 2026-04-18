@@ -5,19 +5,10 @@ bool AddonManager::LoadAddon(std::unique_ptr<GPAddon> addon) {
     if (addon->available()) {
         auto block = std::make_unique<AddonBlock>();
         addon->setup();
-        // Add to categorized lists for optimized iteration
-        preprocessList.push_back(addon.get());
-        processList.push_back(addon.get());
-        postprocessList.push_back(addon.get());
-
         block->ptr = std::move(addon);
         addons.push_back(std::move(block));
-        
-        
         return true;
-    } 
-    // unique_ptr will handle deletion if not moved
-
+    }
     return false;
 }
 
@@ -37,20 +28,20 @@ void AddonManager::ReinitializeAddons() {
 }
 
 void AddonManager::PreprocessAddons() {
-    for (GPAddon* addon : preprocessList) {
-        addon->preprocess();
+    for (const auto& block : addons) {
+        block->ptr->preprocess();
     }
 }
 
 void AddonManager::ProcessAddons() {
-    for (GPAddon* addon : processList) {
-        addon->process();
+    for (const auto& block : addons) {
+        block->ptr->process();
     }
 }
 
 void AddonManager::PostprocessAddons(bool reportSent) {
-    for (GPAddon* addon : postprocessList) {
-        addon->postprocess(reportSent);
+    for (const auto& block : addons) {
+        block->ptr->postprocess(reportSent);
     }
 }
 

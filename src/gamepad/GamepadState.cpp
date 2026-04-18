@@ -170,25 +170,19 @@ uint8_t __not_in_flash_func(runSOCDCleaner)(SOCDMode mode, uint8_t dpad)
 	static DpadDirection lastUD = DIRECTION_NONE;
 	static DpadDirection lastLR = DIRECTION_NONE;
 
-	// Fast path: BYPASS mode
-	if (mode == SOCD_MODE_BYPASS) {
-		return dpad;
-	}
-
-	// Fast path: UP_PRIORITY mode (LUT)
-	// Reset state to prevent stale values if user switches to SECOND/FIRST_INPUT_PRIORITY
-	if (mode == SOCD_MODE_UP_PRIORITY) {
-		lastUD = DIRECTION_NONE;
-		lastLR = DIRECTION_NONE;
-		return socd_up_priority_lut[dpad & 0x0F];
-	}
-
-	// Fast path: NEUTRAL mode (LUT)
-	// Reset state to prevent stale values if user switches to SECOND/FIRST_INPUT_PRIORITY
-	if (mode == SOCD_MODE_NEUTRAL) {
-		lastUD = DIRECTION_NONE;
-		lastLR = DIRECTION_NONE;
-		return socd_neutral_lut[dpad & 0x0F];
+	switch (mode) {
+		case SOCD_MODE_BYPASS:
+			return dpad;
+		case SOCD_MODE_UP_PRIORITY:
+			lastUD = DIRECTION_NONE;
+			lastLR = DIRECTION_NONE;
+			return socd_up_priority_lut[dpad & 0x0F];
+		case SOCD_MODE_NEUTRAL:
+			lastUD = DIRECTION_NONE;
+			lastLR = DIRECTION_NONE;
+			return socd_neutral_lut[dpad & 0x0F];
+		default:
+			break;
 	}
 
 	// State-based logic for SECOND_INPUT_PRIORITY and FIRST_INPUT_PRIORITY

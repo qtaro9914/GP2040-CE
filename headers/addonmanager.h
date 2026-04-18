@@ -30,11 +30,7 @@ public:
     void PostprocessAddons(bool);
     GPAddon * GetAddon(std::string); // hack for NeoPicoLED
 private:
-    std::vector<std::unique_ptr<AddonBlock>> addons;    // addons currently loaded
-    // Categorized addon lists for optimized iteration
-    std::vector<GPAddon*> preprocessList;
-    std::vector<GPAddon*> processList;
-    std::vector<GPAddon*> postprocessList;
+    std::vector<std::unique_ptr<AddonBlock>> addons;
 };
 
 #endif
